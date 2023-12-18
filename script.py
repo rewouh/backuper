@@ -42,12 +42,14 @@ def check_backups():
     #    create_base_config()
 
 def handle_args():
-    if name == 'save' or name == 's':
+    if name in ['save', 's', 'create', 'c']:
         action_save()
-    elif name == 'del' or name == 'd':
+    elif name in ['delete', 'del', 'd', 'remove', 'rem', 'r']:
         action_delete()
-    elif name == 'load' or name == 'l':
+    elif name in ['load', 'l']:
         action_load()
+    elif name in ['list']:
+        action_list()
     else:
         raise Exception(f'Unrecognized argument: {name}')
 
@@ -124,6 +126,18 @@ def action_delete():
     print('Here is the path of the backup:')
     print(bpath)
     print('For safety reasons, this utility can not delete backups by itself, you need to do it yourself')
+
+def action_list():
+    if argc != 2:
+        raise Exception('Wrong usage: bu list')
+
+    print('Available backups:\n')
+
+    for bname in os.listdir(backups_dir_path):
+        print(f'{bname}:')
+        for file in os.listdir(f'{backups_dir_path}/{bname}'):
+            print(f'   - {file}')
+        print()
 
 check_backups()
 handle_args()
