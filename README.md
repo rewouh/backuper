@@ -1,5 +1,7 @@
 CLI utility for quick saving/loading files/folders.
 
+I highly recommend creating an alias bu='python3 ...' that points to this utility. 
+
 # Example
 
 - bu create 'path' 'name' : Creates a backup named 'name' of the folder/file indicated by 'path'.
